@@ -5,7 +5,7 @@ class Loop:
   _frames: rx.Observable
   _fps: int
 
-  def __init__(self: 'Loop', fps: int):
+  def __init__(self: 'Loop', fps: int) -> 'Loop':
     self._fps = fps
 
   def start(self: 'Loop') -> rx.Observable:

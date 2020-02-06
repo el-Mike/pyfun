@@ -1,24 +1,37 @@
 import rx
 from rx import operators as ops
 
-from .config import Config
+from engine.config import Config
 
-from .loop import Loop
+from engine.loop import Loop
+from engine.window import Window
+from engine.sprite_manager import SpriteManager
 
 class Game:
   config: Config
+  window: Window
+  sprite_manager: SpriteManager
 
-  def __init__(self: 'Game', config: Config):
+  def __init__(self: 'Game', config: Config) -> 'Game':
     self.config = config
+    self.window = Window(self.config)
+    self.sprite_manager = SpriteManager()
+
+  def step(self: 'Game') -> None:
+    bg = self.sprite_manager.get('bg')
+    
+    self.window.surface.blit(bg, (0, 0))
 
   def start(
     self: 'Game',
   ) -> None:
     loop = Loop(self.config.fps)
+
+    self.window.start()
     
     frames = loop.start()
 
-    frames.subscribe(lambda value: print(value))
+    frames.subscribe(lambda v: self.step())
 
     # keeps program executing, as loop is based on interval Observable
     input()
