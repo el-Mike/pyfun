@@ -4,7 +4,7 @@ import pygame
 
 from engine.typings.pygame_surface import PygameSurface
 
-from engine.game_object.game_object import GameObject
+from engine.renderable.renderable import Renderable
 
 from .config import Config
 
@@ -26,7 +26,9 @@ class Window:
 
     return self.surface
 
-  def render(self: 'Window', game_objects: List[GameObject]) -> None:
-    for game_object in game_objects:
-      game_object.render(self.surface)
+  def render(self: 'Window', renderables: List[Renderable]) -> None:
+    for renderable in renderables:
+      renderable.render(self.surface)
+
+    pygame.display.update()
 

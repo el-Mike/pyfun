@@ -1,10 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
-from engine.typings.pygame_surface import PygameSurface
+from engine.renderable.renderable import Renderable
 
-class GameObject(ABC):
+class GameObject(Renderable):
+  @abstractmethod
   def update(self: 'GameObject') -> 'GameObject':
-    pass
-
-  def render(self: 'GameObject', surface: PygameSurface) -> None:
     pass

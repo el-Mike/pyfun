@@ -7,6 +7,9 @@ from engine.game import Game
 from engine.config import Config
 from engine.sprite_manager import SpriteConfig
 
+from background import Background
+from bird import Bird
+
 FPS = 60
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
@@ -30,6 +33,14 @@ def main():
     SpriteConfig('base', os.path.join(local_dir, "assets/base.png"), [pygame.transform.scale2x]),
     SpriteConfig('pipe', os.path.join(local_dir, "assets/pipe.png"), [pygame.transform.scale2x]),
   ])
+
+  background = Background(game.sprite_manager.get('bg'))
+  birds = [
+    Bird(230, 350, game.sprite_manager.get('bird1')),
+    Bird(130, 350, game.sprite_manager.get('bird1')),
+  ]
+
+  game.state.add([background] + birds)
 
   game.start()
 
