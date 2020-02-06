@@ -1,3 +1,4 @@
+import pygame
 import rx
 from rx import operators as ops
 
@@ -21,6 +22,8 @@ class Game:
     bg = self.sprite_manager.get('bg')
     
     self.window.surface.blit(bg, (0, 0))
+
+    pygame.display.update()
 
   def start(
     self: 'Game',
