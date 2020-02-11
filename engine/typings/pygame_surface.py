@@ -4,7 +4,7 @@ class PygameSurface:
 
   # source can be any drawable object. No specifics so far.
   def blit(
-    self: 'PygameSurface',
+    self,
     source: any,
     dest: Tuple[int, int],
     area: any,

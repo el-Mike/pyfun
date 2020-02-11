@@ -14,10 +14,10 @@ class Window:
   surface: PygameSurface
   
 
-  def __init__(self: 'Window', config: Config) -> 'Window':
+  def __init__(self, config: Config):
     self.config = config
 
-  def start(self: 'Window') -> PygameSurface:
+  def start(self) -> PygameSurface:
     self.surface = cast(
       PygameSurface,
       pygame.display \
@@ -26,7 +26,7 @@ class Window:
 
     return self.surface
 
-  def render(self: 'Window', renderables: List[Renderable]) -> None:
+  def render(self, renderables: List[Renderable]) -> None:
     for renderable in renderables:
       renderable.render(self.surface)
 

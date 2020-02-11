@@ -7,10 +7,10 @@ class Background(Renderable):
   y: int
   img: any
 
-  def __init__(self: 'Background', img: any):
+  def __init__(self, img: any):
     self.x = 0
     self.y = 0
     self.img = img
 
-  def render(self: 'Background', surface: PygameSurface) -> None:
+  def render(self, surface: PygameSurface) -> None:
     surface.blit(self.img, (self.x, self.y))

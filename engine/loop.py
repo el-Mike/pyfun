@@ -5,10 +5,12 @@ class Loop:
   _frames: rx.Observable
   _fps: int
 
-  def __init__(self: 'Loop', fps: int) -> 'Loop':
+  loop: rx.subject.Subject
+
+  def __init__(self, fps: int):
     self._fps = fps
 
-  def start(self: 'Loop') -> rx.Observable:
+  def start(self) -> rx.Observable:
     self._frames = rx \
       .interval(1 / self._fps, scheduler=rx.scheduler.TimeoutScheduler()) \
       .pipe(
@@ -17,3 +19,5 @@ class Loop:
 
     return self._frames
 
+  def stop(self) -> None:
+    self._frames.dispose()

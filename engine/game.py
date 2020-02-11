@@ -1,6 +1,7 @@
-import pygame
 import rx
 from rx import operators as ops
+
+import pygame
 
 from engine.config import Config
 
@@ -14,27 +15,38 @@ class Game:
   window: Window
   sprite_manager: SpriteManager
   state: State
+  loop: Loop
 
-  def __init__(self: 'Game', config: Config) -> 'Game':
+  def __init__(self, config: Config):
     self.config = config
     self.window = Window(self.config)
     self.sprite_manager = SpriteManager()
     self.state = State()
 
-  def step(self: 'Game') -> None:    
+  def step(self) -> None:
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        self.loop.stop()
+        pygame.quit()
+        quit()
+
     self.window.render(self.state.getRenderables())
 
+  def stop(self) -> None:
+    self.loop.stop()
 
-  def start(
-    self: 'Game',
-  ) -> None:
-    loop = Loop(self.config.fps)
+
+  def start(self) -> None:
+    self.loop = Loop(self.config.fps)
 
     self.window.start()
     
-    frames = loop.start()
+    frames = self.loop.start()
 
-    frames.subscribe(lambda v: self.step())
+    frames.subscribe(
+      on_next=lambda x: self.step(),
+      on_completed=lambda x: print('COMPLETED!')
+    )
 
     # keeps program executing, as loop is based on interval Observable
     input()

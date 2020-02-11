@@ -11,13 +11,13 @@ class SpriteConfig(NamedTuple):
 class SpriteManager:
   _sprites: Dict[str, any]
 
-  def __init__(self: 'SpriteManager') -> 'SpriteManager':
+  def __init__(self):
     self._sprites = dict()
 
   # sprinte_config tuple contains: name, path and transform functions
   # in the given order.
   def register(
-    self: 'SpriteManager',
+    self,
     sprite_configs: List[SpriteConfig]
   ) -> None:
     for sprite_config in sprite_configs:
@@ -33,5 +33,5 @@ class SpriteManager:
         sprite
       )])
 
-  def get(self: 'SpriteManager', key: str) -> any:
+  def get(self, key: str) -> any:
     return self._sprites.get(key)

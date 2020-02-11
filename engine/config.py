@@ -6,7 +6,7 @@ class Config:
   window_height: int
 
   def __init__(
-    self: 'Config',
+    self,
     fps: int,
     window_width: int,
     window_height
